@@ -40,7 +40,7 @@ function App() {
     window.addEventListener('resize', handleResize);
 
     //note: cleanup function
-    //note: cleanup function runs first to cle  an up code that we write last time
+    //note: cleanup function runs first to cleanup code that we write last time
     //note: also cleanup function runs when component unmounts
     return () => {
       window.removeEventListener('resize', handleResize);

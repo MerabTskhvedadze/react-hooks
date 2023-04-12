@@ -1,47 +1,16 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
+import FunctionContextComponent from './FunctionContextComponent';
+import { ThemeProvider } from './ThemeContext';
+
+//note: when using context it is broken into two sections
+//note: you have context provider which wraps code that needs to access context information
+//note: it has a single prop called value which is going to be whatever the value of your context is
+//note: the code inside provider and its childs and its childs have access to this value prop
 
 export default function App() {
-  const [name, setName] = useState('');
-  const renderCount = useRef(0);
-  const inputRef = useRef('');
-  const prevValue = useRef('');
-
-  //note: ref does not causes reupdate component when it is changed
-  //note: so if we want to count renders we should use ref
-  useEffect(() => {
-    renderCount.current = renderCount.current + 1;
-  });
-
-  const focus = () => {
-    //note: inputRef gives the current element
-    console.log(inputRef);
-    inputRef.current.focus();
-  };
-
-  //note: another usecase of useRef is store previous values of element
-  useEffect(() => {
-    prevValue.current = name;
-  }, [name]);
-
   return (
-    <div>
-      {/* part1 */}
-      <input
-        ref={inputRef}
-        type='text'
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <h1>My Is Name {name}</h1>
-      <h2>i rendered {renderCount.current} times</h2>
-
-      {/* part2 */}
-      <button onClick={focus}>Focus</button>
-
-      {/* part3 */}
-      <p>
-        My name is {name} and used to be {prevValue.current}
-      </p>
-    </div>
+    <ThemeProvider>
+      <FunctionContextComponent />
+    </ThemeProvider>
   );
 }
